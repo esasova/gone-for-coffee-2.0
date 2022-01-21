@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\CoffeeshopRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=CoffeeshopRepository::class)
+ * @ApiResource()
  */
 class Coffeeshop
 {
@@ -51,6 +53,16 @@ class Coffeeshop
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $sunday;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $website;
 
     public function getId(): ?int
     {
@@ -137,6 +149,30 @@ class Coffeeshop
     public function setSunday(?bool $sunday): self
     {
         $this->sunday = $sunday;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): self
+    {
+        $this->website = $website;
 
         return $this;
     }
