@@ -1,0 +1,102 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+
+env:
+    fail-fast: true
+    SYMFONY_PHPUNIT_DIR: "$HOME/symfony-bridge/.phpunit"
+    SYMFONY_REQUIRE: ">=5.2"
+
+jobs:
+    back:
+        name: "Tests Api (PHP ${{ matrix.php-version }})"
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php-version: ['7.4']
+
+        services:
+            db:
+                image: mariadb:10.2.32
+                ports:
+                    - 3333:3306
+                env:
+                    MYSQL_USER: userdb
+                    MYSQL_PASSWORD: psw
+                    MYSQL_DATABASE: goneforcoffee_db
+                    MYSQL_ROOT_PASSWORD: root
+                options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+
+        steps:
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: "Install PHP with extensions"
+              uses: shivammathur/setup-php@v2
+              with:
+                  coverage: "none"
+                  extensions: xsl, sockets, zip, gd, curl, json
+                  php-version: ${{ matrix.php-version }}
+                  tools: symfony
+
+            - name: "Set composer cache directory"
+              working-directory: ./back
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            - name: "Cache composer"
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
+                  restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
+
+            - name: "Composer install"
+              working-directory: ./back
+              id: install
+              run: composer install --prefer-dist --no-progress --no-interaction
+
+            - name: "Lint Doctrine entities"
+              working-directory: ./back
+              if: always() && steps.install.outcome == 'success'
+              run: ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+
+            - name: "Check if any dependencies are compromised"
+              working-directory: ./back
+              if: always() && steps.install.outcome == 'success'
+              run: symfony check:security
+
+            - name: "Run PHP CS analysis"
+              working-directory: ./back
+              run: vendor/bin/php-cs-fixer fix --dry-run --ansi --verbose
+
+            - name: "Run PHPStan analysis"
+              working-directory: ./back
+              run: vendor/bin/phpstan analyse --ansi src
+              #run: vendor/bin/phpstan analyse -l5 --ansi src
+
+            - name: "Running database migrations"
+              working-directory: ./back
+              env:
+                  DATABASE_URL: 'mysql://userdb:psw@127.0.0.1:3333/goneforcoffee_db?serverVersion=mariadb-10.2.32'
+              run: |
+                  bin/console doctrine:migrations:migrate --no-interaction
+                  bin/console doctrine:schema:validate
+
+            - name: "Load fixtures"
+              working-directory: ./back
+              env:
+                DATABASE_URL: 'mysql://userdb:psw@127.0.0.1:3333/goneforcoffee_db?serverVersion=mariadb-10.2.32'
+              run: |
+                  bin/console hautelook:fixtures:load --no-interaction --purge-with-truncate
+
+            - name: "Run PHPUnit tests"
+              working-directory: ./back
+              env:
+                DATABASE_URL: 'mysql://userdb:psw@127.0.0.1:3333/goneforcoffee_db?serverVersion=mariadb-10.2.32'
+              run: |
+                  vendor/bin/phpunit
