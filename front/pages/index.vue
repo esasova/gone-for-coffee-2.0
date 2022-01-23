@@ -1,6 +1,9 @@
 <template>
-  <div class="font-bold">
+  <div class="font-aleo text-4xl bg-secondary text-primary">
     My future homepage
+    <p class="font-francoisOne text-2xl text-accent">
+      Fonts and colors test
+    </p>
   </div>
 </template>
 
