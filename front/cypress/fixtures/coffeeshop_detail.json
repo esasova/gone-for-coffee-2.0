@@ -1,0 +1,15 @@
+{
+  "@context": "/api/contexts/Coffeeshop",
+  "@id": "/api/coffeeshops/1",
+  "@type": "Coffeeshop",
+  "id": 1,
+  "name": "Coffee House",
+  "address": "15 boulevard des Belges",
+  "city": "Lyon",
+  "postcode": "69000",
+  "description": "Quam ipsam voluptatem cupiditate sed natus debitis voluptas. Laudantium sit repudiandae esse perspiciatis dignissimos error et itaque. Tempora velit porro ut velit soluta explicabo eligendi.",
+  "brunch": true,
+  "sunday": true,
+  "phone": "09 86 85 78 51",
+  "website": "http://zulauf.net/voluptates-id-amet-et-et-suscipit-qui-recusandae"
+}

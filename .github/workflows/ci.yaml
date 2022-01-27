@@ -129,3 +129,15 @@ jobs:
         - name: "Run Lint"
           working-directory: ./front
           run: yarn lint
+    cypress:
+      name: "Test front with cypress"
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Cypress run
+          uses: cypress-io/github-action@v2
+          with:
+            build: yarn generate
+            start: yarn start
+            working-directory: ./front
