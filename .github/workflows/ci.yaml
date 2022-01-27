@@ -129,21 +129,16 @@ jobs:
         - name: "Run Lint"
           working-directory: ./front
           run: yarn lint
-    front_cypress:
-      name: "Tests front (Node ${{ matrix.node }})"
+    cypress:
+      name: "Test front with cypress"
       runs-on: ubuntu-latest
-      jobs:
-        cypress-run:
-          runs-on: ubuntu-latest
-          steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-            # Install NPM dependencies, cache them correctly
-            # and run all Cypress tests
-            - name: Cypress run
-              uses: cypress-io/github-action@v2
-              with:
-                build: npm run build
-                start: npm start
-                wait-on: 'http://localhost:3000'
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Cypress run
+          uses: cypress-io/github-action@v2
+          with:
+            build: npm run build
+            start: npm start
+            wait-on: 'http://localhost:3000'
 
