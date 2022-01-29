@@ -6,6 +6,7 @@ App\Entity\Coffeeshop:
     postCode: '69000'
     phone: <fr_FR:phoneNumber()>
     website: <url()>
+    coordinates: [45.7712128,4.8648653]
     description: <text()>
     brunch: <boolean(75)>
     sunday: <boolean(75)>

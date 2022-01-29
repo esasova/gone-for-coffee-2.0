@@ -1,0 +1,16 @@
+App\Entity\Day:
+    day_1:
+      name: 'lundi'
+    day_2:
+      name: 'mardi'
+    day_3:
+      name: 'mercredi'
+    day_4:
+      name: 'jeudi'
+    day_5:
+      name: 'vendredi'
+    day_6:
+      name: 'samedi'
+    day_7:
+      name: 'dimanche'
+

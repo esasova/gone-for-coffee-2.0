@@ -76,8 +76,7 @@ jobs:
 
             - name: "Run PHPStan analysis"
               working-directory: ./back
-              run: vendor/bin/phpstan analyse --ansi src
-              #run: vendor/bin/phpstan analyse -l5 --ansi src
+              run: vendor/bin/phpstan analyse
 
             - name: "Running database migrations"
               working-directory: ./back

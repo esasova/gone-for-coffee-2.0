@@ -1,0 +1,12 @@
+App\Entity\User:
+  user_{1..10}:
+    email: <email()>
+    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$R7Yp2KvbpMryniA498C8hg\$KvwosmkhXg/Mi4ftiI7Ld6zb2BqZmH9FIpUzwbsuX50'
+    roles: []
+    name: <firstName()>
+
+  admin:
+    email: admin@gfc.fr
+    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$R7Yp2KvbpMryniA498C8hg\$KvwosmkhXg/Mi4ftiI7Ld6zb2BqZmH9FIpUzwbsuX50'
+    roles: [ROLE_ADMIN]
+    name: Elena
