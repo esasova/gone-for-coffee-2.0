@@ -93,6 +93,11 @@ jobs:
               run: |
                   bin/console hautelook:fixtures:load --no-interaction --purge-with-truncate
 
+            - name: "Create JWT keys"
+              working-directory: ./back
+              run: |
+                bin/console lexik:jwt:generate-keypair
+
             - name: "Run PHPUnit tests"
               working-directory: ./back
               env:

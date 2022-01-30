@@ -16,6 +16,7 @@
   "dependencies": {
     "@cypress/vue": "^2.2.3",
     "@cypress/webpack-dev-server": "^1.8.0",
+    "@nuxtjs/auth-next": "5.0.0-1643365392.dae6516",
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.19.3",
     "html-webpack-plugin": "4",

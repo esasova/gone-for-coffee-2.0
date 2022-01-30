@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Action\GetMeAction;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,8 +15,31 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
+ *  collectionOperations={
+ *          "get"={"access_control"="is_granted('ROLE_ADMIN')"},
+ *          "post"={"route_name"="api_users_post"}
+ *     },
+ *  itemOperations={
+ *         "get"={
+ *             "requirements"={"id"="\d+"},
+ *             "access_control"="is_granted('ROLE_ADMIN') or object.email == user.email"
+ *         },
+ *          "put"={
+ *              "route_name"="api_users_put",
+ *              "access_control"="is_granted('ROLE_ADMIN')"},
+ *          "delete"={"access_control"="is_granted('ROLE_ADMIN')"},
+ *          "get_me"={
+ *             "method"="GET",
+ *             "path"="/users/me",
+ *             "controller"=GetMeAction::class,
+ *             "openapi_context"={
+ *                 "parameters"={}
+ *             },
+ *             "read"=false
+ *         }
+ *     },
  *  normalizationContext={"groups"={"user", "user:read"}},
- *  denormalizationContext={"groups"={"user", "user:write"}}
+ *  denormalizationContext={"groups"={"user", "user:write"}},
  * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -32,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user"})
      */
-    private string $email;
+    public string $email;
 
     /**
      * @ORM\Column(type="json")
