@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TimelineRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,6 +10,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TimelineRepository::class)
+ * @ApiResource(
+ *  normalizationContext={"groups"={"timeline", "timeline:read"}},
+ *  denormalizationContext={"groups"={"timeline", "timeline:write"}}
+ * )
  */
 class Timeline
 {
@@ -16,32 +21,32 @@ class Timeline
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"coffeeshop:read"})
+     * @Groups({"coffeeshop:read", "timeline:read"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="time")
-     * @Groups({"coffeeshop:read"})
+     * @Groups({"coffeeshop", "timeline"})
      */
     private DateTimeInterface $start;
 
     /**
      * @ORM\Column(type="time")
-     * @Groups({"coffeeshop:read"})
+     * @Groups({"coffeeshop", "timeline"})
      */
     private DateTimeInterface $end;
 
     /**
      * @ORM\ManyToOne(targetEntity=Day::class)
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"coffeeshop:read"})
+     * @Groups({"coffeeshop", "timeline"})
      */
     private ?Day $day;
 
     /**
      * @ORM\ManyToOne(targetEntity=Coffeeshop::class, inversedBy="timetable")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private ?Coffeeshop $coffeeshop;
 

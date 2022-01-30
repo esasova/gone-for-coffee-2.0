@@ -80,16 +80,16 @@ class Coffeeshop
     private ?string $website;
 
     /**
-     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="coffeeshop", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="coffeeshop", cascade={"persist", "remove"}, orphanRemoval=true)
      * @Groups({"coffeeshop"})
      */
-    private ArrayCollection $ratings;
+    private Collection $ratings;
 
     /**
-     * @ORM\OneToMany(targetEntity=Timeline::class, mappedBy="coffeeshop")
+     * @ORM\OneToMany(targetEntity=Timeline::class, mappedBy="coffeeshop", cascade={"persist", "remove"}, orphanRemoval=true)
      * @Groups({"coffeeshop"})
      */
-    private ArrayCollection $timetable;
+    private Collection $timetable;
 
     /**
      * @ORM\Column(type="simple_array", nullable=true)

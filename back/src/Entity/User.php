@@ -56,10 +56,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      * @Groups({"user"})
      */
-    private ArrayCollection $ratings;
+    private Collection $ratings;
 
     public function __construct()
     {

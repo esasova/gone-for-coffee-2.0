@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RatingRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=RatingRepository::class)
+ * @ApiResource(
+ *  normalizationContext={"groups"={"rating", "rating:read"}},
+ *  denormalizationContext={"groups"={"rating", "rating:write"}}
+ * )
  */
 class Rating
 {
@@ -15,25 +20,26 @@ class Rating
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user:read", "coffeeshop:read"})
+     * @Groups({"user:read", "coffeeshop:read", "rating:read"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"user:read", "coffeeshop:read"})
+     * @Groups({"user:read", "coffeeshop:read", "rating"})
      */
     private int $rating;
 
     /**
      * @ORM\ManyToOne(targetEntity=Coffeeshop::class, inversedBy="ratings")
-     * @Groups({"user:read"})
+     * @Groups({"user:read", "rating"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private ?Coffeeshop $coffeeshop;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="ratings")
-     * @Groups({"coffeeshop:read"})
+     * @Groups({"coffeeshop:read", "rating"})
      */
     private ?User $user;
 
