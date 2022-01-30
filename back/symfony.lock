@@ -462,6 +462,9 @@
             "config/packages/messenger.yaml"
         ]
     },
+    "symfony/mime": {
+        "version": "v5.4.3"
+    },
     "symfony/monolog-bridge": {
         "version": "v5.3.7"
     },
@@ -514,6 +517,9 @@
         ]
     },
     "symfony/polyfill-intl-grapheme": {
+        "version": "v1.24.0"
+    },
+    "symfony/polyfill-intl-idn": {
         "version": "v1.24.0"
     },
     "symfony/polyfill-intl-normalizer": {
