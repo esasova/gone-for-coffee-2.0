@@ -3,16 +3,24 @@
 namespace App\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
 use Hautelook\AliceBundle\PhpUnit\BaseDatabaseTrait;
 
 class CoffeeshopTest extends ApiTestCase
 {
     use BaseDatabaseTrait;
-    public $client;
+    public Client $client;
+    public string $jwt;
 
     public function setUp(): void
     {
+        $data = ['username' => 'admin@gfc.fr', 'roles' => ['ROLE_ADMIN']];
+
         $this->client = self::createClient();
+        $this->jwt = static::$container
+            ->get('lexik_jwt_authentication.encoder')
+            ->encode($data);
+
         static::populateDatabase();
     }
 
@@ -22,7 +30,10 @@ class CoffeeshopTest extends ApiTestCase
             'GET',
             '/api/coffeeshops.json',
             [
-                'headers' => ['accept' => ['application/json']],
+                'headers' => [
+                    'accept' => ['application/json'],
+                    'Authorization' => 'Bearer '.$this->jwt,
+                ],
             ]
         );
 
@@ -52,7 +63,10 @@ class CoffeeshopTest extends ApiTestCase
             'POST',
             '/api/coffeeshops',
              [
-                'headers' => ['accept' => ['application/json']],
+                 'headers' => [
+                     'accept' => ['application/json'],
+                     'Authorization' => 'Bearer '.$this->jwt,
+                 ],
                 'json' => [
                     'name' => 'Mokxa Coffee 2',
                     'address' => '2 rue Jubin',
@@ -108,7 +122,10 @@ class CoffeeshopTest extends ApiTestCase
             'GET',
             '/api/coffeeshops.json',
             [
-                'headers' => ['accept' => ['application/json']],
+                'headers' => [
+                    'accept' => ['application/json'],
+                    'Authorization' => 'Bearer '.$this->jwt,
+                ],
             ]
         );
 
@@ -121,7 +138,10 @@ class CoffeeshopTest extends ApiTestCase
             'PUT',
             '/api/coffeeshops/1',
             [
-                'headers' => ['accept' => ['application/json']],
+                'headers' => [
+                    'accept' => ['application/json'],
+                    'Authorization' => 'Bearer '.$this->jwt,
+                ],
                 'json' => [
                     'name' => 'Mokxa Coffee 3',
                     'address' => '3 rue Jubin',
@@ -144,7 +164,10 @@ class CoffeeshopTest extends ApiTestCase
             'GET',
             '/api/coffeeshops/1',
             [
-                'headers' => ['accept' => ['application/json']],
+                'headers' => [
+                    'accept' => ['application/json'],
+                    'Authorization' => 'Bearer '.$this->jwt,
+                ],
             ]
         );
 
@@ -164,7 +187,12 @@ class CoffeeshopTest extends ApiTestCase
         $this->client->request(
             'DELETE',
             '/api/coffeeshops/1',
-            []
+            [
+                'headers' => [
+                    'accept' => ['application/json'],
+                    'Authorization' => 'Bearer '.$this->jwt,
+                ],
+            ]
         );
         $this->assertResponseIsSuccessful();
     }
