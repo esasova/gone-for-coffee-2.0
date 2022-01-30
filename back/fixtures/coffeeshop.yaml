@@ -1,11 +1,23 @@
 App\Entity\Coffeeshop:
-  coffeeshop_{1..10}:
+  coffeeshop_1:
+    name: 'Mokxa Coffee'
+    address: '1 rue Jubin'
+    city: 'Villeurbanne'
+    postCode: '69100'
+    phone: <fr_FR:phoneNumber()>
+    website: <url()>
+    coordinates: ['45.7712128','4.8648653']
+    description: 'best coffee shop ever !'
+    brunch: true
+    sunday: true
+  coffeeshop_{2..10}:
     name: '<randomElement(["Street", "Esprit", "Le", "Coffee", "Café"])> <randomElement(["House", "Friends", "Shop"])>'
     address: '<numberBetween(1, 20)> <randomElement(["rue de la République", "rue Garibaldi", "place Bellecour", "rue de Marseille", "rue André Bollier", "boulevard des Belges"])>'
     city: 'Lyon'
     postCode: '69000'
     phone: <fr_FR:phoneNumber()>
     website: <url()>
+    coordinates: ['45.7712128','4.8648653']
     description: <text()>
     brunch: <boolean(75)>
     sunday: <boolean(75)>

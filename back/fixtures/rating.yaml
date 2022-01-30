@@ -1,0 +1,8 @@
+include:
+  - ./user.yaml
+  - ./coffeeshop.yaml
+App\Entity\Rating:
+  rating{1..40}:
+    rating: '<numberBetween(1, 5)>'
+    coffeeshop: '@coffeeshop*'
+    user: '@user*'

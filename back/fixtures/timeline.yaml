@@ -1,0 +1,39 @@
+include:
+  - ./day.yaml
+  - ./coffeeshop.yaml
+App\Entity\Timeline:
+  timeline_1{1..5}:
+    coffeeshop: '@coffeeshop_<numberBetween(1, 10)>'
+    day: '@day_1'
+    start: <(new DateTime('2021-09-20T09:00:00+02:00'))>
+    end: <(new DateTime('2021-09-20T18:00:00+02:00'))>
+  timeline_2{1..10}:
+    coffeeshop: '@coffeeshop_<current()>'
+    day: '@day_2'
+    start: <(new DateTime('2021-09-20T09:00:00+02:00'))>
+    end: <(new DateTime('2021-09-20T18:00:00+02:00'))>
+  timeline_3{1..10}:
+    coffeeshop: '@coffeeshop_<current()>'
+    day: '@day_3'
+    start: <(new DateTime('2021-09-20T09:00:00+02:00'))>
+    end: <(new DateTime('2021-09-20T18:00:00+02:00'))>
+  timeline_4{1..10}:
+    coffeeshop: '@coffeeshop_<current()>'
+    day: '@day_4'
+    start: <(new DateTime('2021-09-20T09:00:00+02:00'))>
+    end: <(new DateTime('2021-09-20T18:00:00+02:00'))>
+  timeline_5{1..10}:
+    coffeeshop: '@coffeeshop_<current()>'
+    day: '@day_5'
+    start: <(new DateTime('2021-09-20T09:00:00+02:00'))>
+    end: <(new DateTime('2021-09-20T18:00:00+02:00'))>
+  timeline_6{1..10}:
+    coffeeshop: '@coffeeshop_<current()>'
+    day: '@day_6'
+    start: <(new DateTime('2021-09-20T09:00:00+02:00'))>
+    end: <(new DateTime('2021-09-20T18:00:00+02:00'))>
+  timeline_7{1..5}:
+    coffeeshop: '@coffeeshop_<numberBetween(1, 10)>'
+    day: '@day_7'
+    start: <(new DateTime('2021-09-20T09:00:00+02:00'))>
+    end: <(new DateTime('2021-09-20T18:00:00+02:00'))>

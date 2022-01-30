@@ -4,11 +4,17 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CoffeeshopRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CoffeeshopRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *  normalizationContext={"groups"={"coffeeshop", "coffeeshop:read"}},
+ *  denormalizationContext={"groups"={"coffeeshop", "coffeeshop:write"}}
+ * )
  */
 class Coffeeshop
 {
@@ -16,53 +22,88 @@ class Coffeeshop
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"coffeeshop", "user:read"})
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"coffeeshop", "user:read"})
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"coffeeshop"})
      */
-    private $address;
+    private ?string $address;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"coffeeshop"})
      */
-    private $city;
+    private ?string $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"coffeeshop"})
      */
-    private $postcode;
+    private ?string $postcode;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"coffeeshop"})
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"coffeeshop"})
      */
-    private $brunch;
+    private ?bool $brunch;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"coffeeshop"})
      */
-    private $sunday;
+    private ?bool $sunday;
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $phone;
+    private ?string $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"coffeeshop"})
      */
-    private $website;
+    private ?string $website;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="coffeeshop", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Groups({"coffeeshop"})
+     */
+    private Collection $ratings;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Timeline::class, mappedBy="coffeeshop", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Groups({"coffeeshop"})
+     */
+    private Collection $timetable;
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @Groups({"coffeeshop"})
+     *
+     * @var array<string>|null
+     */
+    private ?array $coordinates = [];
+
+    public function __construct()
+    {
+        $this->ratings = new ArrayCollection();
+        $this->timetable = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -173,6 +214,84 @@ class Coffeeshop
     public function setWebsite(?string $website): self
     {
         $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rating[]
+     */
+    public function getRatings(): Collection
+    {
+        return $this->ratings;
+    }
+
+    public function addRating(Rating $rating): self
+    {
+        if (!$this->ratings->contains($rating)) {
+            $this->ratings[] = $rating;
+            $rating->setCoffeeshop($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRating(Rating $rating): self
+    {
+        if ($this->ratings->removeElement($rating)) {
+            // set the owning side to null (unless already changed)
+            if ($rating->getCoffeeshop() === $this) {
+                $rating->setCoffeeshop(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Timeline[]
+     */
+    public function getTimetable(): Collection
+    {
+        return $this->timetable;
+    }
+
+    public function addTimetable(Timeline $timeline): self
+    {
+        if (!$this->timetable->contains($timeline)) {
+            $this->timetable[] = $timeline;
+            $timeline->setCoffeeshop($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTimetable(Timeline $timeline): self
+    {
+        if ($this->timetable->removeElement($timeline)) {
+            // set the owning side to null (unless already changed)
+            if ($timeline->getCoffeeshop() === $this) {
+                $timeline->setCoffeeshop(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getCoordinates(): ?array
+    {
+        return $this->coordinates;
+    }
+
+    /**
+     * @param array<string>|null $coordinates
+     */
+    public function setCoordinates(?array $coordinates): self
+    {
+        $this->coordinates = $coordinates;
 
         return $this;
     }
