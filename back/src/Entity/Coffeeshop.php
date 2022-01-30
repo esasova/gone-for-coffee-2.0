@@ -99,6 +99,11 @@ class Coffeeshop
      */
     private ?array $coordinates = [];
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $image;
+
     public function __construct()
     {
         $this->ratings = new ArrayCollection();
@@ -292,6 +297,18 @@ class Coffeeshop
     public function setCoordinates(?array $coordinates): self
     {
         $this->coordinates = $coordinates;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
