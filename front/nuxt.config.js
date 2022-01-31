@@ -28,7 +28,8 @@ export default {
   ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/fontawesome.js'
+    '~/plugins/fontawesome.js',
+    { src: '~/plugins/leaflet.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -43,7 +44,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/dayjs'
   ],
   auth: {
     strategies: {
@@ -61,6 +63,12 @@ export default {
   },
   axios: {
     baseURL: process.env.API_URL || 'http://127.0.0.1:8000/api'
+  },
+  dayjs: {
+    locales: ['fr'],
+    defaultLocale: 'fr',
+    defaultTimeZone: 'utc',
+    plugins: ['utc', 'timezone', 'isBetween']
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

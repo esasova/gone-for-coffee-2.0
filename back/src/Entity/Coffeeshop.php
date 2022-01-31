@@ -84,6 +84,7 @@ class Coffeeshop
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
+     * @Groups({"coffeeshop"})
      */
     private ?string $phone;
 
