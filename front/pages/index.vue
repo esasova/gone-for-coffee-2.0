@@ -1,35 +1,37 @@
 <template>
-  <div class="w-full h-screen">
-    <div class="w-full py-36 bg-no-repeat bg-cover homepage_image text-accent font-francoisOne text-6xl text-center">
+  <div class="w-full min-h-screen">
+    <div class="w-full py-36 bg-no-repeat bg-cover homepage_image text-accent font-francoisOne text-6xl text-center md:text-8xl">
       Gône for coffee
     </div>
-    <div class="w-full p-8 bg-primary text-justify font-aleo text-xl text-accent mb-4">
-      Combien de fois en cherchant « café lyon », on était déçu parce qu’on tombait
+    <div class="w-full p-8 bg-primary text-justify font-aleo text-xl text-accent mb-4 md:p-12 md:leading-relaxed lg:text-2xl lg:px-36">
+      Combien de fois en cherchant «&nbsp;café lyon&nbsp;», on était déçu parce qu’on tombait
       sur les Starbucks ou endroits « cosy » où on vous propose de déguster un bon cappuccino en poudre
       dans un cadre de jolis coussins et meubles en palettes… Pour être sûrs de votre prochain café,
       confiez-vous à <span class="font-bold">Gône for Coffee</span>, guide des coffee shops de Lyon.
     </div>
-    <div class="grid grid-rows-2">
-      <div class="m-3 flex justify-between">
-        <input type="text" class="rounded-l p-2" v-model="coffeshop_search" placeholder="Votre recherche">
-        <button class="rounded bg-accent font-francoisOne text-primary p-2">Chercher</button>
+    <div class="grid m-3 mt-6 gap-y-6 lg:grid-rows-none lg:gap-2 lg:mb-6 lg:mx-16" :class="searchInProgress ? 'grid-rows-4 lg:grid-cols-5' : 'grid-rows-3 lg:grid-cols-4'">
+      <div class="flex justify-center">
+        <input v-model="coffeeshop_search" type="text" placeholder="Cherchez un café" class="py-3 pl-2 rounded-lg font-aleo flex-grow">
       </div>
-      <div class="flex">
+      <div class="flex justify-evenly items-center lg:col-span-2">
         <div>
-          <label>Brunch</label>
-          <input v-model="brunch" type="checkbox" id="brunch">
-          <label>Torréfacteur</label>
-          <input v-model="torrefacteur" type="checkbox" id="torrefacteur">
+          <input id="brunch" v-model="brunch" type="checkbox" class="border-primary">
+          <label for="brunch" class="ml-2 text-primary font-aleo font-bold md:text-xl">Brunch</label>
         </div>
         <div>
-          <label>Ouvert le dimanche</label>
-          <input v-model="sunday" type="checkbox" id="sunday">
+          <input id="sunday" v-model="sunday" type="checkbox" class="border-primary">
+          <label for="sunday" class="ml-2 text-primary font-aleo font-bold md:text-xl">Ouvert le dimanche</label>
         </div>
       </div>
+      <AccentButton name="Chercher" :action="searchCoffeeshops" />
+      <AccentButton v-if="searchInProgress" name="Tous les coffeeshops" :action="getCoffeeshops" />
     </div>
-    <div v-if="coffeeShops" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <CoffeeShopCard v-for="coffeeShop in coffeeShops" :key="coffeeShop.id" :coffeeshop="coffeeShop" />
-    </div>
+    <section v-if="coffeeshops" class="m-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:mx-16">
+      <CoffeeShopCard v-for="coffeeShop in coffeeshops" :key="coffeeShop.id" :coffeeshop="coffeeShop" />
+    </section>
+    <section v-if="coffeeshops && coffeeshops.length < 1" class="h-full text-center font-bold font-aleo text-primary text-xl m-3 lg:text-3xl">
+      <div>Malheureusement, il n'y a pas de coffeshops qui correspondent à vos filtres</div>
+    </section>
   </div>
 </template>
 
@@ -37,15 +39,43 @@
 export default {
   data () {
     return {
-      coffeeShops: null,
-      coffeeshop_search: ''
+      coffeeshops: null,
+      coffeeshop_search: '',
+      brunch: null,
+      sunday: null,
+      searchInProgress: false
     }
   },
   mounted () {
-    this.$axios.$get('/coffeeshops.json')
-      .then((response) => {
-        this.coffeeShops = response
-      })
+    this.getCoffeeshops()
+  },
+  methods: {
+    getCoffeeshops () {
+      this.$axios.$get('/coffeeshops.json')
+        .then((response) => {
+          this.coffeeshops = response
+        })
+        .finally(() => {
+          this.searchInProgress = false
+          this.coffeeshop_search = ''
+        })
+    },
+    searchCoffeeshops () {
+      this.$axios.$get('/coffeeshops.json?name=',
+        {
+          params: {
+            name: this.coffeeshop_search,
+            sunday: this.sunday ? this.sunday : null,
+            brunch: this.brunch ? this.brunch : null
+          }
+        })
+        .then((response) => {
+          this.coffeeshops = response
+        })
+        .finally(() => {
+          this.searchInProgress = true
+        })
+    }
   }
 }
 </script>
