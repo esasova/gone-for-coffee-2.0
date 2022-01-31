@@ -1,15 +1,136 @@
 {
   "@context": "/api/contexts/Coffeeshop",
-  "@id": "/api/coffeeshops/1",
+  "@id": "/api/coffeeshops/2",
   "@type": "Coffeeshop",
-  "id": 1,
+  "id": 2,
   "name": "Coffee House",
-  "address": "15 boulevard des Belges",
+  "address": "3 rue de la République",
   "city": "Lyon",
   "postcode": "69000",
-  "description": "Quam ipsam voluptatem cupiditate sed natus debitis voluptas. Laudantium sit repudiandae esse perspiciatis dignissimos error et itaque. Tempora velit porro ut velit soluta explicabo eligendi.",
+  "description": "Ut optio quos qui illo error nihil laborum. A officia id corporis incidunt saepe provident esse. Eligendi quos culpa ut ab voluptas sed a nam.",
   "brunch": true,
   "sunday": true,
-  "phone": "09 86 85 78 51",
-  "website": "http://zulauf.net/voluptates-id-amet-et-et-suscipit-qui-recusandae"
+  "phone": "0101936695",
+  "website": "http://www.hane.org/",
+  "ratings": [
+    {
+      "@id": "/api/ratings/7",
+      "@type": "Rating",
+      "id": 7,
+      "rating": 4,
+      "user": {
+        "@id": "/api/users/6",
+        "@type": "User",
+        "id": 6,
+        "name": "Karlie"
+      }
+    },
+    {
+      "@id": "/api/ratings/20",
+      "@type": "Rating",
+      "id": 20,
+      "rating": 2,
+      "user": {
+        "@id": "/api/users/10",
+        "@type": "User",
+        "id": 10,
+        "name": "Yoshiko"
+      }
+    },
+    {
+      "@id": "/api/ratings/32",
+      "@type": "Rating",
+      "id": 32,
+      "rating": 5,
+      "user": {
+        "@id": "/api/users/6",
+        "@type": "User",
+        "id": 6,
+        "name": "Karlie"
+      }
+    },
+    {
+      "@id": "/api/ratings/36",
+      "@type": "Rating",
+      "id": 36,
+      "rating": 5,
+      "user": {
+        "@id": "/api/users/1",
+        "@type": "User",
+        "id": 1,
+        "name": "Zora"
+      }
+    }
+  ],
+  "timetable": [
+    {
+      "@id": "/api/timelines/7",
+      "@type": "Timeline",
+      "id": 7,
+      "start": "1970-01-01T09:00:00+01:00",
+      "end": "1970-01-01T18:00:00+01:00",
+      "day": {
+        "@id": "/api/days/2",
+        "@type": "Day",
+        "id": 2,
+        "name": "mardi"
+      }
+    },
+    {
+      "@id": "/api/timelines/17",
+      "@type": "Timeline",
+      "id": 17,
+      "start": "1970-01-01T09:00:00+01:00",
+      "end": "1970-01-01T18:00:00+01:00",
+      "day": {
+        "@id": "/api/days/3",
+        "@type": "Day",
+        "id": 3,
+        "name": "mercredi"
+      }
+    },
+    {
+      "@id": "/api/timelines/27",
+      "@type": "Timeline",
+      "id": 27,
+      "start": "1970-01-01T09:00:00+01:00",
+      "end": "1970-01-01T18:00:00+01:00",
+      "day": {
+        "@id": "/api/days/4",
+        "@type": "Day",
+        "id": 4,
+        "name": "jeudi"
+      }
+    },
+    {
+      "@id": "/api/timelines/37",
+      "@type": "Timeline",
+      "id": 37,
+      "start": "1970-01-01T09:00:00+01:00",
+      "end": "1970-01-01T18:00:00+01:00",
+      "day": {
+        "@id": "/api/days/5",
+        "@type": "Day",
+        "id": 5,
+        "name": "vendredi"
+      }
+    },
+    {
+      "@id": "/api/timelines/47",
+      "@type": "Timeline",
+      "id": 47,
+      "start": "1970-01-01T09:00:00+01:00",
+      "end": "1970-01-01T18:00:00+01:00",
+      "day": {
+        "@id": "/api/days/6",
+        "@type": "Day",
+        "id": 6,
+        "name": "samedi"
+      }
+    }
+  ],
+  "coordinates": [
+    "45.7712128",
+    "4.8648653"
+  ]
 }
