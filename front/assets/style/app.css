@@ -6,3 +6,9 @@
   font-family: 'FrancoisOne';
   src: url('../../static/fonts/FrancoisOne/FrancoisOne-Regular.ttf') format('truetype');
 }
+body {
+  background-color: #F4E8D8;
+}
+.homepage_image {
+  background-image: url("assets/images/homepage_image.jpg");
+}
