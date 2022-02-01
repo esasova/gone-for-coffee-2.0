@@ -12,3 +12,6 @@ body {
 .homepage_image {
   background-image: url("assets/images/homepage_image.jpg");
 }
+.login_signup_layout {
+  background-image: url("assets/images/login_signup_bg.jpg");
+}
