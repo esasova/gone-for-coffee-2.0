@@ -1,12 +1,14 @@
 <template>
   <div v-if="mutatedCoffeeshop" class="w-1/2 mx-auto border-1 border-r border-l border-primary p-10">
-    <div class="flex justify-center my-3">
-      <input v-model="mutatedCoffeeshop.name" type="text" class="my-3 rounded p-5 text-primary text-xl font-aleo">
+    <div class="my-10 flex justify-between">
+      <input v-model="mutatedCoffeeshop.name" type="text" class="rounded p-5 text-primary text-xl w-1/3 mx-2 font-aleo" placeholder="Nom">
+      <input v-model="mutatedCoffeeshop.website" type="text" class="rounded p-5 text-primary text-xl w-1/3 mx-2 font-aleo" placeholder="Site">
+      <input v-model="mutatedCoffeeshop.phone" type="text" class="rounded p-5 text-primary text-xl w-1/3 mx-2 font-aleo" placeholder="Téléphone">
     </div>
-    <div class="my-3 flex justify-between">
-      <input v-model="mutatedCoffeeshop.address" type="text" class="rounded p-5 text-primary text-xl w-1/3 font-aleo">
-      <input v-model="mutatedCoffeeshop.city" type="text" class="rounded p-5 text-primary text-xl w-1/4 font-aleo">
-      <input v-model="mutatedCoffeeshop.postcode" type="text" class="rounded p-5 text-primary text-xl w-1/4 font-aleo">
+    <div class="my-10 flex justify-between">
+      <input v-model="mutatedCoffeeshop.address" type="text" class="rounded p-5 text-primary text-xl w-1/3 mx-2 font-aleo" placeholder="Adresse">
+      <input v-model="mutatedCoffeeshop.city" type="text" class="rounded p-5 text-primary text-xl w-1/3 mx-2 font-aleo" placeholder="Ville">
+      <input v-model="mutatedCoffeeshop.postcode" type="text" class="rounded p-5 text-primary text-xl w-1/3 mx-2 font-aleo" placeholder="Code postal">
     </div>
     <div class="my-10 flex justify-center">
       <input
@@ -18,7 +20,7 @@
       <AccentButton name="Générer" :action="handleFormSubmit" />
     </div>
     <div class="my-10">
-      <textarea v-model="mutatedCoffeeshop.description" rows="4" class="w-full text-primary p-5 text-xl font-aleo" />
+      <textarea v-model="mutatedCoffeeshop.description" rows="4" class="w-full text-primary p-5 text-xl font-aleo" placeholder="Description" />
     </div>
     <div class="my-10 flex justify-evenly">
       <div>
@@ -65,6 +67,8 @@ export default {
           address: '',
           city: '',
           postcode: '',
+          website: '',
+          phone: '',
           description: '',
           brunch: false,
           sunday: false,
