@@ -1,8 +1,20 @@
 <template>
-  <div v-if="coffeeshop" class="w-full min-h-screen grid grid-cols-1 lg:grid-rows-none lg:grid-cols-2 lg:gap-2.5">
-    <img src="~/assets/images/coffeeshop_placeholder.jpg" class="order-first">
-    <div class="flex justify-center items-center font-francoisOne text-primary text-3xl text-center my-5 md:text-5xl lg:order-3" data-test="coffeeshop_detail_name">
+  <div v-if="coffeeshop" class="w-full min-h-screen grid grid-cols-1 lg:grid-rows-none lg:grid-cols-2 lg:gap-2.5 px-10">
+    <img :src="coffeeshop.image ? $axios.defaults.baseURL + coffeeshop.image : require('~/assets/images/coffeeshop_placeholder.jpg')" class="order-first">
+    <div class="flex flex-col justify-center items-center font-francoisOne text-primary text-3xl text-center my-5 md:text-5xl lg:order-3" data-test="coffeeshop_detail_name">
       {{ coffeeshop.name }}
+      <div class="flex justify-center mt-3">
+        <FontAwesomeIcon v-for="i in 5" :key="i" :icon="['fas', 'coffee']" :class="i <= coffeeshopRating ? 'text-accent' : 'text-gray-500'" />
+      </div>
+      <div v-if="$auth.user && !alreadyRated" class="mt-3">
+        <p class="text-center font-francoisOne text-primary mb-2 text-base">
+          Noter le coffee shop
+        </p>
+        <FontAwesomeIcon v-for="i in 5" :key="i" :icon="['fas', 'coffee']" class="text-gray-500 cursor-pointer hover:text-accent" @click="rateCoffeeshop(i)" />
+      </div>
+      <div v-if="ratingThanks" class="text-center font-francoisOne text-primary mb-2 text-base">
+        Merci !
+      </div>
     </div>
     <div class="flex flex-col justify-center items-center bg-accent p-5 font-aleo text-primary text-justify leading-relaxed my-3 md:text-2xl lg:order-5">
       {{ coffeeshop.description }}
@@ -26,10 +38,10 @@
             {{ timeline.day.name }}
           </td>
           <td class="p-2">
-            {{ $dayjs(timeline.start).format('HH:hh') }}
+            {{ $dayjs(timeline.start).format('HH:mm') }}
           </td>
           <td class="p-2">
-            {{ $dayjs(timeline.end).format('HH:hh') }}
+            {{ $dayjs(timeline.end).format('HH:mm') }}
           </td>
         </tr>
       </table>
@@ -49,11 +61,21 @@ export default {
   data () {
     return {
       coffeeshop: null,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      ratingThanks: false
+    }
+  },
+  computed: {
+    coffeeshopRating () {
+      return Math.ceil(this.coffeeshop.ratings.map(el => el.rating).reduce((p, c) => p + c, 0) / this.coffeeshop.ratings.length)
+    },
+    alreadyRated () {
+      return this.coffeeshop ? this.coffeeshop.ratings.some(el => el.user.id === this.$auth.user.id) : false
     }
   },
   mounted () {
     this.getCoffeeshop()
+    console.log(this.alreadyRated)
     setTimeout(function () {
       window.dispatchEvent(new Event('resize'))
     }, 1000)
@@ -63,6 +85,21 @@ export default {
       this.$axios.$get('/api/coffeeshops/' + this.$route.params.id)
         .then((response) => {
           this.coffeeshop = response
+        })
+    },
+    rateCoffeeshop (rating) {
+      this.$axios.$post('/api/ratings',
+        {
+          rating,
+          user: '/api/users/' + this.$auth.user.id,
+          coffeeshop: '/api/coffeeshops/' + this.coffeeshop.id
+        })
+        .then(() => {
+          this.getCoffeeshop()
+          this.ratingThanks = true
+        })
+        .catch((error) => {
+          console.log(error)
         })
     }
   }

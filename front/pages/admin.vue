@@ -1,8 +1,13 @@
 <template>
   <div class="w-full min-h-screen relative">
-    <h1 class="my-6 text-center text-accent text-5xl font-francoisOne font-bold">
-      Tous les coffee shops
-    </h1>
+    <div class="flex justify-end">
+      <nuxt-link to="/coffeeshops/add" class="rounded bg-primary text-accent font-francoisOne font-bold text-xl text-center p-3 m-3">
+        Ajouter
+      </nuxt-link>
+    </div>
+    <div class="my-6 text-center text-accent text-5xl font-francoisOne font-bold">
+      <h1>Tous les coffee shops</h1>
+    </div>
     <div class="w-full px-12">
       <table class="w-full">
         <tr class="p-2 bg-primary px-12 text-2xl">

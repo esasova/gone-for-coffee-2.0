@@ -1,11 +1,14 @@
 <template>
   <div class="bg-accent p-1 rounded-xl flex flex-col">
-    <img src="~/assets/images/coffeeshop_placeholder.jpg" class="rounded-xl">
+    <img :src="coffeeshop.image ? $axios.defaults.baseURL + coffeeshop.image : require('~/assets/images/coffeeshop_placeholder.jpg')" class="rounded-xl">
     <nuxt-link :to="`/coffeeshops/${coffeeshop.id}`" class="font-francoisOne text-primary text-2xl">
       <h2 class="my-4 text-primary font-francoisOne text-center text-3xl" data-test="coffeeshop_name">
         {{ coffeeshop.name }}
       </h2>
     </nuxt-link>
+    <div class="flex justify-center mt-2 text-xl">
+      <FontAwesomeIcon v-for="i in 5" :key="i" :icon="['fas', 'coffee']" :class="i <= coffeeshopRating ? 'text-primary' : 'text-gray-400'" />
+    </div>
     <p class="my-4 text-primary font-aleo text-center text-xl flex-grow">
       {{ coffeeshop.description }}
     </p>
@@ -27,6 +30,11 @@ export default {
     coffeeshop: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    coffeeshopRating () {
+      return Math.ceil(this.coffeeshop.ratings.map(el => el.rating).reduce((p, c) => p + c, 0) / this.coffeeshop.ratings.length)
     }
   }
 }
