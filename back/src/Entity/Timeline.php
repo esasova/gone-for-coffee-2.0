@@ -47,6 +47,7 @@ class Timeline
     /**
      * @ORM\ManyToOne(targetEntity=Coffeeshop::class, inversedBy="timetable")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @Groups({"timeline"})
      */
     private ?Coffeeshop $coffeeshop;
 

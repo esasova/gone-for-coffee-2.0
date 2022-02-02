@@ -39,7 +39,7 @@ class UploadImageActionController extends AbstractController
                     $newFilename
                 );
 
-            $coffeeshop->setImage('/public/uploads/'.$newFilename);
+            $coffeeshop->setImage('/uploads/'.$newFilename);
 
             $entityManager->persist($coffeeshop);
             $entityManager->flush();

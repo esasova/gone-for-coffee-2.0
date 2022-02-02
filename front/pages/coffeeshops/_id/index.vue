@@ -45,6 +45,7 @@
 
 <script>
 export default {
+  auth: false,
   data () {
     return {
       coffeeshop: null,
@@ -59,7 +60,7 @@ export default {
   },
   methods: {
     getCoffeeshop () {
-      this.$axios.$get('http://127.0.0.1:8000/api/coffeeshops/' + this.$route.params.id)
+      this.$axios.$get('/api/coffeeshops/' + this.$route.params.id)
         .then((response) => {
           this.coffeeshop = response
         })

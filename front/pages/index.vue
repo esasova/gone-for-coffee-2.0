@@ -37,6 +37,7 @@
 
 <script>
 export default {
+  auth: false,
   data () {
     return {
       coffeeshops: null,
@@ -51,8 +52,8 @@ export default {
     console.log(this.$auth.user)
   },
   methods: {
-    getCoffeeshops () {
-      this.$axios.$get('/coffeeshops.json')
+    async getCoffeeshops () {
+      await this.$axios.$get('/api/coffeeshops.json')
         .then((response) => {
           this.coffeeshops = response
         })
@@ -62,7 +63,7 @@ export default {
         })
     },
     searchCoffeeshops () {
-      this.$axios.$get('/coffeeshops.json?name=',
+      this.$axios.$get('/api/coffeeshops.json?name=',
         {
           params: {
             name: this.coffeeshop_search,

@@ -3,6 +3,9 @@
     <p v-if="$auth.user" class="text-accent font-francoisOne mx-4 md:text-xl">
       Bienvenue, {{ $auth.user.name }}
     </p>
+    <nuxt-link v-if="$auth.user && $auth.user.roles.includes('ROLE_ADMIN')" to="/admin" class="text-accent font-francoisOne mx-4 md:text-xl">
+      Espace admin
+    </nuxt-link>
     <button v-if="$auth.user" class="text-accent font-francoisOne mx-4 md:text-xl" @click="logout">
       Log out
     </button>
