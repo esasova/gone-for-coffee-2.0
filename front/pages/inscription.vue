@@ -52,6 +52,7 @@
 
 <script>
 export default {
+  auth: false,
   layout: 'login',
   data () {
     return {
@@ -74,7 +75,7 @@ export default {
       })
     },
     async handleSignInSubmit () {
-      await this.$axios.$post('/users',
+      await this.$axios.$post('/api/users',
         {
           name: this.name,
           email: this.email,
