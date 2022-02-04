@@ -34,7 +34,7 @@
             <nuxt-link :to="`coffeeshops/${coffeeshop.id}/edit`">
               <PrimaryRoundButton icon-name="pencil-alt" />
             </nuxt-link>
-            <PrimaryRoundButton icon-name="trash" />
+            <ConfirmationPopup :confirm="() => deleteCoffeeshop(coffeeshop.id)" />
           </td>
         </tr>
       </table>
@@ -67,7 +67,7 @@ export default {
     deleteCoffeeshop (coffeeshopId) {
       this.$axios.$delete('/api/coffeeshops/' + coffeeshopId)
         .then(() => {
-          this.validateDelete = false
+          this.getCoffeeshops()
         })
     }
   }

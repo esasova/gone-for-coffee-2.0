@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  middleware: 'auth-admin',
   methods: {
     submit (coffeeshop) {
       this.$axios.$post('/api/coffeeshops',

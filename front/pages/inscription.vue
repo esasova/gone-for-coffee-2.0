@@ -43,7 +43,7 @@
       class="py-3 pl-2 rounded font-aleo mb-3 w-2/3"
     >
     <span class="text-center my-3 text-red-800 font-bold font-aleo mb-3">{{ errors.first('repeat_password') }}</span>
-    <AccentButton name="S'inscrire" :action="signIn" class="py-2" />
+    <AccentButton name="S'inscrire" class="py-2" @click.native="signIn" />
     <p v-if="generalError.length > 0" class="text-center my-3 text-red-800 text-xl font-bold font-aleo">
       {{ generalError }}
     </p>

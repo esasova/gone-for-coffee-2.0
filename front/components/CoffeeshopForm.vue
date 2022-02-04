@@ -17,7 +17,7 @@
         class="rounded p-5 text-primary text-xl font-aleo mr-6 w-2/3"
         placeholder="Cliquez le bouton pour obtenir les coordonnées"
       >
-      <AccentButton name="Générer" :action="handleFormSubmit" />
+      <AccentButton name="Générer" @click.native="handleFormSubmit" />
     </div>
     <div class="my-10">
       <textarea v-model="mutatedCoffeeshop.description" rows="4" class="w-full text-primary p-5 text-xl font-aleo" placeholder="Description" />
@@ -50,7 +50,7 @@
       </div>
     </div>
     <div class="my-3 w-1/2 mx-auto flex justify-center">
-      <AccentButton name="Sauvegarder" :action="handleFormSubmit" class="py-4" />
+      <AccentButton name="Sauvegarder" class="py-4" @click.native="handleFormSubmit" />
     </div>
   </div>
 </template>
@@ -104,15 +104,13 @@ export default {
   },
   methods: {
     handleFormSubmit () {
-      const tempTable = []
-      for (const el of this.$refs.timetable) {
-        const timeline = {}
-        timeline.start = el._data.start
-        timeline.end = el._data.end
-        timeline.day = '/api/days/' + el._props.dayId
-        tempTable.push(timeline)
-      }
-      this.mutatedCoffeeshop.timetable = tempTable.filter(el => el.start != null)
+      this.mutatedCoffeeshop.timetable = this.$refs.timetable.map(function (el) {
+        return {
+          start: el._data.start,
+          end: el._data.end,
+          day: '/api/days/' + el._props.dayId
+        }
+      }).filter(el => el.start != null)
       this.submit(this.mutatedCoffeeshop)
     },
     processImage (event) {
@@ -125,7 +123,6 @@ export default {
       this.image = event.target.files[0]
     },
     submitImage (coffeeshopId) {
-      console.log(this.image)
       if (this.image) {
         const formData = new FormData()
         formData.append('image', this.image)

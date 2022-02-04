@@ -6,6 +6,9 @@
       <div class="flex justify-center mt-3">
         <FontAwesomeIcon v-for="i in 5" :key="i" :icon="['fas', 'coffee']" :class="i <= coffeeshopRating ? 'text-accent' : 'text-gray-500'" />
       </div>
+      <div class="text-center font-francoisOne text-primary mb-2 text-base">
+        Changer ma note
+      </div>
       <div v-if="$auth.user && !alreadyRated" class="mt-3">
         <p class="text-center font-francoisOne text-primary mb-2 text-base">
           Noter le coffee shop
@@ -46,8 +49,8 @@
         </tr>
       </table>
     </div>
-    <div class="lg:order-2">
-      <l-map :zoom="17" :center="coffeeshop.coordinates" style="height:100%">
+    <div class="lg:order-2 h-full">
+      <l-map :zoom="17" :center="coffeeshop.coordinates" style="height: 200px">
         <l-tile-layer :z-index="0" url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" :attribution="attribution" />
         <l-marker :lat-lng="coffeeshop.coordinates" />
       </l-map>
@@ -75,7 +78,7 @@ export default {
   },
   mounted () {
     this.getCoffeeshop()
-    console.log(this.alreadyRated)
+    console.log(document.documentElement.clientWidth, window.innerWidth)
     setTimeout(function () {
       window.dispatchEvent(new Event('resize'))
     }, 1000)
@@ -107,5 +110,7 @@ export default {
 </script>
 
 <style scoped>
-
+.test-96 {
+  height: 400px;
+}
 </style>

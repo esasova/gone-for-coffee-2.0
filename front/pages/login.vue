@@ -10,7 +10,7 @@
     <span class="text-center my-3 text-red-800 font-bold font-aleo mb-3">{{ errors.first('email') }}</span>
     <input v-model="password" v-validate.continues="'required'" type="password" name="password" placeholder="Mot de passe" class="py-3 pl-2 rounded font-aleo mb-3 w-2/3">
     <span class="text-center my-3 text-red-800 font-bold font-aleo mb-3">{{ errors.first('password') }}</span>
-    <AccentButton name="Se connecter" :action="login" class="py-2" />
+    <AccentButton name="Se connecter" class="py-2" @click.native="login" />
     <p v-if="generalError.length > 0" class="text-center my-3 text-red-800 text-xl font-bold font-aleo">
       {{ generalError }}
     </p>

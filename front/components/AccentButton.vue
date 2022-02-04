@@ -1,5 +1,5 @@
 <template>
-  <button class="w-1/2 mx-auto bg-accent text-primary font-francoisOne rounded lg:w-2/3" @click="action">
+  <button class="w-1/2 mx-auto bg-accent text-primary font-francoisOne rounded lg:w-2/3">
     {{ name }}
   </button>
 </template>
@@ -9,10 +9,6 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
-    },
-    action: {
-      type: Function,
       required: true
     }
   }

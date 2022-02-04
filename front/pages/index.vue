@@ -23,8 +23,8 @@
           <label for="sunday" class="ml-2 text-primary font-aleo font-bold md:text-xl">Ouvert le dimanche</label>
         </div>
       </div>
-      <AccentButton name="Chercher" :action="searchCoffeeshops" />
-      <AccentButton v-if="searchInProgress" name="Tous les coffeeshops" :action="getCoffeeshops" />
+      <AccentButton name="Chercher" @click.native="searchCoffeeshops" />
+      <AccentButton v-if="searchInProgress" name="Tous les coffeeshops" @click.native="getCoffeeshops" />
     </div>
     <section v-if="coffeeshops" class="m-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:mx-16">
       <CoffeeShopCard v-for="coffeeShop in coffeeshops" :key="coffeeShop.id" :coffeeshop="coffeeShop" />
