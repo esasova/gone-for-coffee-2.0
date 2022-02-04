@@ -17,7 +17,7 @@
         class="rounded p-5 text-primary text-xl font-aleo mr-6 w-2/3"
         placeholder="Cliquez le bouton pour obtenir les coordonnées"
       >
-      <AccentButton name="Générer" @click.native="handleFormSubmit" />
+      <AccentButton name="Générer" @click.native="getCoordinates" />
     </div>
     <div class="my-10">
       <textarea v-model="mutatedCoffeeshop.description" rows="4" class="w-full text-primary p-5 text-xl font-aleo" placeholder="Description" />
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import { OpenStreetMapProvider } from 'leaflet-geosearch'
 export default {
   props: {
     coffeeshop: {
@@ -67,6 +68,7 @@ export default {
           address: '',
           city: '',
           postcode: '',
+          coordinates: [],
           website: '',
           phone: '',
           description: '',
@@ -137,6 +139,16 @@ export default {
             console.log(error)
           })
       }
+    },
+    getCoordinates () {
+      const provider = new OpenStreetMapProvider()
+      provider.search({ query: this.mutatedCoffeeshop.address + ' ' + this.mutatedCoffeeshop.city })
+        .then((result) => {
+          this.mutatedCoffeeshop.coordinates = [result[0].y, result[0].x]
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }

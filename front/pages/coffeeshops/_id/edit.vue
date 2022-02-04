@@ -32,6 +32,7 @@ export default {
           address: coffeeshop.address,
           city: coffeeshop.city,
           postcode: coffeeshop.postcode,
+          coordinates: coffeeshop.coordinates,
           description: coffeeshop.description,
           brunch: coffeeshop.brunch,
           sunday: coffeeshop.sunday,
