@@ -29,7 +29,8 @@
     <section v-if="coffeeshops" class="m-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:mx-16">
       <CoffeeShopCard v-for="coffeeShop in coffeeshops" :key="coffeeShop.id" :coffeeshop="coffeeShop" />
     </section>
-    <section v-if="coffeeshops && coffeeshops.length < 1" class="h-full text-center font-bold font-aleo text-primary text-xl m-3 lg:text-3xl">
+    <Loader v-else />
+    <section v-if="searchNull" class="h-full text-center font-bold font-aleo text-primary text-xl m-3 lg:text-3xl">
       <div>Malheureusement, il n'y a pas de coffeshops qui correspondent à vos filtres</div>
     </section>
   </div>
@@ -44,7 +45,8 @@ export default {
       coffeeshop_search: '',
       brunch: null,
       sunday: null,
-      searchInProgress: false
+      searchInProgress: false,
+      searchNull: false
     }
   },
   mounted () {
@@ -63,7 +65,7 @@ export default {
         })
     },
     searchCoffeeshops () {
-      this.$axios.$get('/api/coffeeshops.json?name=',
+      this.$axios.$get('/api/coffeeshops.json?',
         {
           params: {
             name: this.coffeeshop_search,
@@ -73,6 +75,9 @@ export default {
         })
         .then((response) => {
           this.coffeeshops = response
+          if (this.coffeeshops.length < 1) {
+            this.searchNull = true
+          }
         })
         .finally(() => {
           this.searchInProgress = true
