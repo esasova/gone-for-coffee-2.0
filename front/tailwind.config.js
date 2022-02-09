@@ -6,6 +6,10 @@ module.exports = {
         primary: '#508186',
         secondary: '#F4E8D8',
         accent: '#F4BE6A'
+      },
+      height: {
+        88: '22rem',
+        160: '40rem'
       }
     },
     fontFamily: {

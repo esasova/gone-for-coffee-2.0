@@ -1,12 +1,12 @@
 <template>
   <div v-if="coffeeshop" class="w-full min-h-screen grid grid-cols-1 lg:grid-rows-none lg:grid-cols-2 lg:gap-2.5 px-10">
-    <img :src="coffeeshop.image ? $axios.defaults.baseURL + coffeeshop.image : require('~/assets/images/coffeeshop_placeholder.jpg')" class="order-first">
+    <img :src="coffeeshop.image ? $axios.defaults.baseURL + coffeeshop.image : require('~/assets/images/coffeeshop_placeholder.jpg')" class="order-first lg:h-88 xl:h-160">
     <div class="flex flex-col justify-center items-center font-francoisOne text-primary text-3xl text-center my-5 md:text-5xl lg:order-3" data-test="coffeeshop_detail_name">
       {{ coffeeshop.name }}
       <div class="flex justify-center mt-3">
         <FontAwesomeIcon v-for="i in 5" :key="i" :icon="['fas', 'coffee']" :class="i <= coffeeshopRating ? 'text-accent' : 'text-gray-500'" />
       </div>
-      <div class="text-center font-francoisOne text-primary mb-2 text-base">
+      <div v-if="$auth.user && alreadyRated" class="text-center font-francoisOne text-primary mb-2 text-base cursor-pointer" @click="changeRating">
         Changer ma note
       </div>
       <div v-if="$auth.user && !alreadyRated" class="mt-3">
@@ -49,8 +49,8 @@
         </tr>
       </table>
     </div>
-    <div class="lg:order-2 h-full">
-      <l-map :zoom="17" :center="coffeeshop.coordinates" style="height: 200px">
+    <div class="lg:order-2 h-64 lg:h-88 xl:h-160">
+      <l-map :zoom="17" :center="coffeeshop.coordinates" style="height: 100%">
         <l-tile-layer :z-index="0" url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" :attribution="attribution" />
         <l-marker :lat-lng="coffeeshop.coordinates" />
       </l-map>
@@ -104,13 +104,13 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    changeRating () {
+      this.$axios.$delete('/api/ratings/' + this.coffeeshop.ratings.find(el => el.user.id === this.$auth.user.id).id)
+        .then(() => {
+          this.getCoffeeshop()
+        })
     }
   }
 }
 </script>
-
-<style scoped>
-.test-96 {
-  height: 400px;
-}
-</style>
