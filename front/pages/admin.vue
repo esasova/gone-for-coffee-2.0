@@ -61,9 +61,6 @@ export default {
         .then((response) => {
           this.coffeeshops = response
         })
-        .finally(() => {
-          console.log(this.coffeeshops)
-        })
     },
     deleteCoffeeshop (coffeeshopId) {
       this.$axios.$delete('/api/coffeeshops/' + coffeeshopId)

@@ -69,7 +69,6 @@ export default {
         if (valid) {
           this.handleSignInSubmit()
         } else {
-          console.log('problème sign in')
           this.generalError = 'Vos données ne sont pas valides'
         }
       })

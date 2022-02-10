@@ -46,7 +46,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/dayjs'
+    '@nuxtjs/dayjs',
+    '@nuxtjs/toast'
   ],
   auth: {
     strategies: {
@@ -71,6 +72,11 @@ export default {
   },
   router: {
     middleware: ['auth']
+  },
+  toast: {
+    position: 'top-center',
+    theme: 'toasted-primary',
+    duration: 5000
   },
   dayjs: {
     locales: ['fr'],

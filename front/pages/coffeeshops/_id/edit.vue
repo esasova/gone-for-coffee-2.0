@@ -44,11 +44,11 @@ export default {
         .then((response) => {
           this.$refs.coffeeshopForm.submitImage(response.id)
         })
-        .catch((error) => {
-          console.log(error)
-        })
-        .finally(() => {
+        .then(() => {
           this.$router.push('/coffeeshops/' + this.$route.params.id)
+        })
+        .catch(() => {
+          this.$toast.error('Something went wrong...')
         })
     }
   }
