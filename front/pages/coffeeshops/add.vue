@@ -27,11 +27,11 @@ export default {
         .then((response) => {
           this.$refs.coffeeshopForm.submitImage(response.id)
         })
-        .catch((error) => {
-          console.log(error)
-        })
-        .finally(() => {
+        .then(() => {
           this.$router.push('/admin')
+        })
+        .catch(() => {
+          this.$toast.error('Something went wrong...')
         })
     }
   }

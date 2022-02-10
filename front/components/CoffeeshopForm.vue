@@ -135,8 +135,8 @@ export default {
               'Content-Type': 'multipart/form-data'
             }
           })
-          .catch((error) => {
-            console.log(error)
+          .catch(() => {
+            this.$toast.error('Impossible de télécharger l\'image')
           })
       }
     },
@@ -146,8 +146,8 @@ export default {
         .then((result) => {
           this.mutatedCoffeeshop.coordinates = [result[0].y, result[0].x]
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
+          this.$toast.error('Impossible d\'obtenir les coordonnées, vérifiez l\'adresse')
         })
     }
   }

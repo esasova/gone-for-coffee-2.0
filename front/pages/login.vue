@@ -60,7 +60,6 @@ export default {
       } catch (error) {
         if (error.response.status === 401) {
           this.generalError = 'Mauvais identifiants'
-          console.log(error)
         } else {
           this.generalError = 'Quelque chose s\'est mal passé...'
         }

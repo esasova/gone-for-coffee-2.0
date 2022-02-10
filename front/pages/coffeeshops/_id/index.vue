@@ -81,7 +81,6 @@ export default {
   },
   mounted () {
     this.getCoffeeshop()
-    console.log(document.documentElement.clientWidth, window.innerWidth)
     setTimeout(function () {
       window.dispatchEvent(new Event('resize'))
     }, 1000)
@@ -104,8 +103,8 @@ export default {
           this.getCoffeeshop()
           this.ratingThanks = true
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
+          this.$toast.error('Désolée, impossible d\'ajouter votre note')
         })
     },
     changeRating () {

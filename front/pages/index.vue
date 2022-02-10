@@ -51,7 +51,6 @@ export default {
   },
   mounted () {
     this.getCoffeeshops()
-    console.log(this.$auth.user)
   },
   methods: {
     async getCoffeeshops () {
