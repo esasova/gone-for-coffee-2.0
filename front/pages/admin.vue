@@ -9,7 +9,7 @@
       <h1>Tous les coffee shops</h1>
     </div>
     <div class="w-full px-12">
-      <table class="w-full">
+      <table v-if="coffeeshops" class="w-full">
         <tr class="p-2 bg-primary px-12 text-2xl">
           <th class="p-2 text-center font-aleo text-accent font-bold">
             Nom
@@ -38,6 +38,7 @@
           </td>
         </tr>
       </table>
+      <Loader v-else />
     </div>
   </div>
 </template>

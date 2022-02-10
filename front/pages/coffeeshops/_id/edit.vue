@@ -1,9 +1,12 @@
 <template>
-  <div v-if="coffeeshop" class="w-full min-h-screen">
-    <h1 class="my-6 text-center text-accent text-5xl font-francoisOne font-bold">
-      Modifier le coffee shop {{ coffeeshop.name }}
-    </h1>
-    <CoffeeshopForm ref="coffeeshopForm" :coffeeshop="coffeeshop" :submit="submit" />
+  <div>
+    <div v-if="coffeeshop" class="w-full min-h-screen">
+      <h1 class="my-6 text-center text-accent text-5xl font-francoisOne font-bold">
+        Modifier le coffee shop {{ coffeeshop.name }}
+      </h1>
+      <CoffeeshopForm ref="coffeeshopForm" :coffeeshop="coffeeshop" :submit="submit" />
+    </div>
+    <Loader v-else />
   </div>
 </template>
 
