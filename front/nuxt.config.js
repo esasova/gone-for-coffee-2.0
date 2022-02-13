@@ -19,7 +19,7 @@ export default {
     ]
   },
   purgeCSS: {
-    whitelistPatterns: [/svg.*/, /fa.*/]
+    whitelistPatterns: [/svg.*/, /-fa$/, /^fa-/]
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -55,8 +55,8 @@ export default {
           property: ''
         },
         endpoints: {
-          login: { url: 'http://localhost:8000/api/login_check', method: 'post', propertyName: 'token' },
-          user: { url: 'http://localhost:8000/api/users/me', method: 'get', propertyName: 'data' },
+          login: { url: '/api/login_check', method: 'post', propertyName: 'token' },
+          user: { url: '/api/users/me', method: 'get', propertyName: 'data' },
           logout: false
         }
       }

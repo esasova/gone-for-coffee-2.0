@@ -5,7 +5,7 @@
       <div class="flex flex-col justify-center items-center font-francoisOne text-primary text-3xl text-center my-5 md:text-5xl lg:order-3" data-test="coffeeshop_detail_name">
         {{ coffeeshop.name }}
         <div class="flex justify-center mt-3">
-          <FontAwesomeIcon v-for="i in 5" :key="i" :icon="['fas', 'coffee']" :class="i <= coffeeshopRating ? 'text-accent' : 'text-gray-500'" />
+          <i v-for="i in 5" :key="i" class="fa fas fa-coffee" :class="i <= coffeeshopRating ? 'text-accent' : 'text-gray-500'" />
         </div>
         <div v-if="$auth.user && alreadyRated" class="text-center font-francoisOne text-primary mb-2 text-base cursor-pointer" @click="changeRating">
           Changer ma note
@@ -14,7 +14,7 @@
           <p class="text-center font-francoisOne text-primary mb-2 text-base">
             Noter le coffee shop
           </p>
-          <FontAwesomeIcon v-for="i in 5" :key="i" :icon="['fas', 'coffee']" class="text-gray-500 cursor-pointer hover:text-accent" @click="rateCoffeeshop(i)" />
+          <i v-for="i in 5" :key="i" class="fa fas fa-coffee text-gray-500 cursor-pointer hover:text-accent" @click="rateCoffeeshop(i)" />
         </div>
         <div v-if="ratingThanks" class="text-center font-francoisOne text-primary mb-2 text-base">
           Merci !
@@ -23,8 +23,8 @@
       <div class="flex flex-col justify-center items-center bg-accent p-5 font-aleo text-primary text-justify leading-relaxed my-3 md:text-2xl lg:order-5">
         {{ coffeeshop.description }}
         <div class="flex justify-center my-4 text-primary text-4xl">
-          <FontAwesomeIcon v-show="coffeeshop.brunch" :icon="['fas', 'utensils']" class="mx-2" />
-          <FontAwesomeIcon v-show="coffeeshop.sunday" :icon="['fas', 'sun']" class="mx-2" />
+          <i v-show="coffeeshop.brunch" class="fa fas fa-utensils mx-2" />
+          <FontAwesomeIcon v-show="coffeeshop.sunday" class="mx-2 fa fas fa-sun" />
         </div>
       </div>
       <div class="bg-primary font-aleo p-5 my-3 text-accent font-bold text-center md:text-2xl lg:order-4">
