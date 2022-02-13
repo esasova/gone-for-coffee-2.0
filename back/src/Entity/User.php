@@ -17,16 +17,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *  collectionOperations={
  *          "get"={"access_control"="is_granted('ROLE_ADMIN')"},
- *          "post"={"route_name"="api_users_post"}
+ *          "post"
  *     },
  *  itemOperations={
  *         "get"={
  *             "requirements"={"id"="\d+"},
  *             "access_control"="is_granted('ROLE_ADMIN') or object.email == user.email"
  *         },
- *          "put"={
- *              "route_name"="api_users_put",
- *              "access_control"="is_granted('ROLE_ADMIN')"},
+ *          "put"={"access_control"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"access_control"="is_granted('ROLE_ADMIN')"},
  *          "get_me"={
  *             "method"="GET",
