@@ -82,6 +82,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "compile": [
+            "@php bin/console lexik:jwt:generate-keypair --overwrite --quiet --env prod",
+            "@php bin/console doctrine:migrations:migrate --no-interaction"
         ]
     },
     "conflict": {
