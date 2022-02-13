@@ -1,6 +1,6 @@
 <template>
   <button class="rounded-full w-14 h-14 bg-primary text-accent mx-2">
-    <FontAwesomeIcon :icon="['fas', iconName]" />
+    <i :class="`fa fas fa-${iconName}`" />
   </button>
 </template>
 

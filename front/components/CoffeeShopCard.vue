@@ -7,14 +7,14 @@
       </h2>
     </nuxt-link>
     <div class="flex justify-center mt-2 text-xl">
-      <FontAwesomeIcon v-for="i in 5" :key="i" :icon="['fas', 'coffee']" :class="i <= coffeeshopRating ? 'text-primary' : 'text-gray-400'" />
+      <i v-for="i in 5" :key="i" class="fa fas fa-coffee" :class="i <= coffeeshopRating ? 'text-primary' : 'text-gray-400'" />
     </div>
     <p class="my-4 text-primary font-aleo text-center text-xl flex-grow">
       {{ coffeeshop.description }}
     </p>
     <div class="flex justify-center my-4 text-primary text-4xl">
-      <FontAwesomeIcon v-show="coffeeshop.brunch" :icon="['fas', 'utensils']" class="mx-2" />
-      <FontAwesomeIcon v-show="coffeeshop.sunday" :icon="['fas', 'sun']" class="mx-2" />
+      <i v-show="coffeeshop.sunday" class="fa fas fa-sun mx-2" />
+      <i v-show="coffeeshop.brunch" class="fa fas fa-utensils mx-2" />
     </div>
     <div class="text-center my-4">
       <nuxt-link :to="`/coffeeshops/${coffeeshop.id}`" class="text-primary text-2xl font-francoisOne">

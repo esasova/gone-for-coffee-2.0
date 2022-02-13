@@ -1,7 +1,7 @@
 <template>
   <header class="w-full h-16 bg-primary flex justify-between items-center px-3">
     <nuxt-link to="/" class="text-accent text-4xl">
-      <FontAwesomeIcon :icon="['fas', 'coffee']" />
+      <i class="fa fas fa-coffee" />
     </nuxt-link>
     <p v-if="$auth.user" class="text-accent font-francoisOne mx-4 md:text-xl">
       Bienvenue, {{ $auth.user.name }}
