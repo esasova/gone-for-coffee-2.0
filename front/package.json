@@ -14,8 +14,6 @@
     "test:e2e:dev": "start-server-and-test dev http://localhost:3000 cy:open"
   },
   "dependencies": {
-    "@cypress/vue": "^2.2.3",
-    "@cypress/webpack-dev-server": "^1.8.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^2.0.6",
@@ -37,6 +35,8 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
+    "@cypress/vue": "^2.2.3",
+    "@cypress/webpack-dev-server": "^1.8.0",
     "@nuxt/types": "^2.15.8",
     "@nuxtjs/eslint-config": "^5.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
