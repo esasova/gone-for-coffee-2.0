@@ -1,6 +1,7 @@
 <template>
   <div class="bg-accent p-1 rounded-xl flex flex-col">
-    <img :src="coffeeshop.image ? $axios.defaults.baseURL + coffeeshop.image : require('~/assets/images/coffeeshop_placeholder.jpg')" class="rounded-xl h-52 md:h-60 lg:h-80">
+    <!--<img :src="coffeeshop.image ? $axios.defaults.baseURL + coffeeshop.image : require('~/assets/images/coffeeshop_placeholder.jpg')" class="rounded-xl h-52 md:h-60 lg:h-80">-->
+    <div :style="coffeeshop.image ? `backgroundImage: url(${$axios.defaults.baseURL}${coffeeshop.image})` : `backgroundImage: url(${require(`~/assets/images/coffeeshop_placeholder.jpg`)}`" class="rounded-xl h-52 md:h-60 lg:h-80 bg-cover bg-center bg-no-repeat" />
     <nuxt-link :to="`/coffeeshops/${coffeeshop.id}`" class="font-francoisOne text-primary text-2xl">
       <h2 class="my-4 text-primary font-francoisOne text-center text-3xl" data-test="coffeeshop_name">
         {{ coffeeshop.name }}
