@@ -26,8 +26,8 @@ export default {
   },
   data () {
     return {
-      start: this.coffeeshop.timetable.some(tl => tl.day.id === this.dayId) ? new Intl.DateTimeFormat('fr-FR', {hour: 'numeric', minute: 'numeric'}).format(new Date(this.coffeeshop.timetable.find(tl => tl.day.id === this.dayId).start)) : null,
-      end: this.coffeeshop.timetable.some(tl => tl.day.id === this.dayId) ? new Intl.DateTimeFormat('fr-FR', {hour: 'numeric', minute: 'numeric'}).format(new Date(this.coffeeshop.timetable.find(tl => tl.day.id === this.dayId).end)) : null,
+      start: this.coffeeshop.timetable.some(tl => tl.day.id === this.dayId) ? this.$dayjs(this.coffeeshop.timetable.find(tl => tl.day.id === this.dayId).start).tz('Europe/London', true).format('HH:mm:ss') : null,
+      end: this.coffeeshop.timetable.some(tl => tl.day.id === this.dayId) ? this.$dayjs(this.coffeeshop.timetable.find(tl => tl.day.id === this.dayId).end).tz('Europe/London', true).format('HH:mm:ss') : null
     }
   },
   methods: {
