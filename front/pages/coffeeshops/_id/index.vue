@@ -24,7 +24,7 @@
         {{ coffeeshop.description }}
         <div class="flex justify-center my-4 text-primary text-4xl">
           <i v-show="coffeeshop.brunch" class="fa fas fa-utensils mx-2" />
-          <FontAwesomeIcon v-show="coffeeshop.sunday" class="mx-2 fa fas fa-sun" />
+          <i v-show="coffeeshop.sunday" class="mx-2 fa fas fa-sun" />
         </div>
       </div>
       <div class="bg-primary font-aleo p-5 my-3 text-accent font-bold text-center md:text-2xl lg:order-4">
