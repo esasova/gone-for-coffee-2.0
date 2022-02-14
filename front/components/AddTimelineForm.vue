@@ -26,8 +26,8 @@ export default {
   },
   data () {
     return {
-      start: this.coffeeshop.timetable.some(tl => tl.day.id === this.dayId) ? this.$dayjs(this.coffeeshop.timetable.find(tl => tl.day.id === this.dayId).start).format('HH:mm:ss') : null,
-      end: this.coffeeshop.timetable.some(tl => tl.day.id === this.dayId) ? this.$dayjs(this.coffeeshop.timetable.find(tl => tl.day.id === this.dayId).end).format('HH:mm:ss') : null
+      start: this.coffeeshop.timetable.some(tl => tl.day.id === this.dayId) ? this.$dayjs(this.coffeeshop.timetable.find(tl => tl.day.id === this.dayId).start).utc(true).format('HH:mm:ss') : null,
+      end: this.coffeeshop.timetable.some(tl => tl.day.id === this.dayId) ? this.$dayjs(this.coffeeshop.timetable.find(tl => tl.day.id === this.dayId).end).utc(true).format('HH:mm:ss') : null
     }
   },
   methods: {
