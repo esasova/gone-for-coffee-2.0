@@ -42,10 +42,10 @@
               {{ timeline.day.name }}
             </td>
             <td class="p-2">
-              {{ $dayjs(timeline.start).utc(true).format('HH:mm') }}
+              {{ new Intl.DateTimeFormat('fr-FR', {hour: 'numeric', minute: 'numeric'}).format(new Date(timeline.start))  }}
             </td>
             <td class="p-2">
-              {{ $dayjs(timeline.end).utc(true).format('HH:mm') }}
+              {{ new Intl.DateTimeFormat('fr-FR', {hour: 'numeric', minute: 'numeric'}).format(new Date(timeline.end))  }}
             </td>
           </tr>
         </table>
