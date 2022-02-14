@@ -4,7 +4,7 @@
       {{ dayName }}
     </p>
     <input v-model="start" class="rounded p-2 mx-3" type="time" step="1800">
-    <input v-model="end" class="rounded p-2 mx-3" type="time">
+    <input v-model="end" class="rounded p-2 mx-3" type="time" step="1800">
   </div>
 </template>
 

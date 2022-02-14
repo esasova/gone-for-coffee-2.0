@@ -80,7 +80,6 @@ export default {
   dayjs: {
     locales: ['fr'],
     defaultLocale: 'fr',
-    defaultTimeZone: 'utc',
     plugins: ['utc', 'timezone', 'isBetween']
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build

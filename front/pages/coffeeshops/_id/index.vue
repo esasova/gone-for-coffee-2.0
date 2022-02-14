@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="coffeeshop" class="w-full min-h-screen grid grid-cols-1 lg:grid-rows-none lg:grid-cols-2 lg:gap-2.5 px-10">
-      <img :src="coffeeshop.image ? $axios.defaults.baseURL + coffeeshop.image : require('~/assets/images/coffeeshop_placeholder.jpg')" class="order-first lg:h-88 xl:h-160">
+      <div :style="coffeeshop.image ? `backgroundImage: url(${$axios.defaults.baseURL}${coffeeshop.image})` : `backgroundImage: url(${require(`~/assets/images/coffeeshop_placeholder.jpg`)}`" class="order-first h-64 md:h-80 lg:h-88 xl:h-160 bg-cover bg-center bg-no-repeat" />
       <div class="flex flex-col justify-center items-center font-francoisOne text-primary text-3xl text-center my-5 md:text-5xl lg:order-3" data-test="coffeeshop_detail_name">
         {{ coffeeshop.name }}
         <div class="flex justify-center mt-3">
@@ -24,13 +24,13 @@
         {{ coffeeshop.description }}
         <div class="flex justify-center my-4 text-primary text-4xl">
           <i v-show="coffeeshop.brunch" class="fa fas fa-utensils mx-2" />
-          <FontAwesomeIcon v-show="coffeeshop.sunday" class="mx-2 fa fas fa-sun" />
+          <i v-show="coffeeshop.sunday" class="mx-2 fa fas fa-sun" />
         </div>
       </div>
       <div class="bg-primary font-aleo p-5 my-3 text-accent font-bold text-center md:text-2xl lg:order-4">
         <p>{{ coffeeshop.address }} {{ coffeeshop.postcode }} {{ coffeeshop.city }}</p>
         <p>{{ coffeeshop.phone }}</p>
-        <p>{{ coffeeshop.website }}</p>
+        <a :href="coffeeshop.website">{{ coffeeshop.website }}</a>
       </div>
       <div class="bg-accent font-aleo p-5 my-3 text-primary md:text-2xl order-last lg:order-5">
         <p class="font-francoisOne text-xl md:text-3xl text-center">
