@@ -30,7 +30,7 @@
       <div class="bg-primary font-aleo p-5 my-3 text-accent font-bold text-center md:text-2xl lg:order-4">
         <p>{{ coffeeshop.address }} {{ coffeeshop.postcode }} {{ coffeeshop.city }}</p>
         <p>{{ coffeeshop.phone }}</p>
-        <a :href="coffeeshop.website">{{ coffeeshop.website }}</a>
+        <a :href="coffeeshop.website" target="_blank">{{ coffeeshop.website }}</a>
       </div>
       <div class="bg-accent font-aleo p-5 my-3 text-primary md:text-2xl order-last lg:order-5">
         <p class="font-francoisOne text-xl md:text-3xl text-center">
