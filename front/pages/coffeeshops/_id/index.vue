@@ -80,10 +80,12 @@ export default {
     }
   },
   mounted () {
-    this.getCoffeeshop()
     setTimeout(function () {
       window.dispatchEvent(new Event('resize'))
     }, 1000)
+    this.$nextTick(() => {
+      this.getCoffeeshop()
+    })
   },
   methods: {
     getCoffeeshop () {
