@@ -22,7 +22,9 @@ export default {
           description: coffeeshop.description,
           brunch: coffeeshop.brunch,
           sunday: coffeeshop.sunday,
-          timetable: coffeeshop.timetable
+          timetable: coffeeshop.timetable,
+          phone: coffeeshop.phone,
+          website: coffeeshop.website
         })
         .then((response) => {
           this.$refs.coffeeshopForm.submitImage(response.id)

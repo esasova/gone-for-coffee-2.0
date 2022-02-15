@@ -78,8 +78,9 @@ export default {
     duration: 5000
   },
   dayjs: {
-    locales: ['fr'],
-    defaultLocale: 'fr',
+    locales: ['en'],
+    defaultLocale: 'en',
+    defaultTimeZone: 'Europe/London',
     plugins: ['utc', 'timezone', 'isBetween']
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
