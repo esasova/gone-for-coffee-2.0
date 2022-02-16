@@ -5,7 +5,7 @@
       <div class="flex flex-col justify-center items-center font-francoisOne text-primary text-3xl text-center my-5 md:text-5xl lg:order-3" data-test="coffeeshop_detail_name">
         {{ coffeeshop.name }}
         <div class="flex justify-center mt-3">
-          <i v-for="i in 5" :key="i" class="fa fas fa-coffee" :class="i <= coffeeshopRating ? 'text-accent' : 'text-gray-500'" />
+          <span v-for="i in 5" :key="i" :class="i <= coffeeshopRating ? 'text-accent' : 'text-gray-500'"><i  class="fa fas fa-coffee" /></span>
         </div>
         <div v-if="$auth.user && alreadyRated" class="text-center font-francoisOne text-primary mb-2 text-base cursor-pointer" @click="changeRating">
           Changer ma note
