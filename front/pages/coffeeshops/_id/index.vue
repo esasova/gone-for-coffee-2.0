@@ -14,7 +14,7 @@
           <p class="text-center font-francoisOne text-primary mb-2 text-base">
             Noter le coffee shop
           </p>
-          <i v-for="i in 5" :key="i" class="fa fas fa-coffee text-gray-500 cursor-pointer hover:text-accent" @click="rateCoffeeshop(i)" />
+          <span v-for="i in 5" :key="i" @click="rateCoffeeshop(i)"><i class="fa fas fa-coffee text-gray-500 cursor-pointer hover:text-accent" /></span>
         </div>
         <div v-if="ratingThanks" class="text-center font-francoisOne text-primary mb-2 text-base">
           Merci !
