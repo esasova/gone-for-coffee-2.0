@@ -60,6 +60,9 @@ export default {
         })
         .finally(() => {
           this.searchInProgress = false
+          this.searchNull = false
+          this.sunday = null
+          this.brunch = null
           this.coffeeshop_search = ''
         })
     },
